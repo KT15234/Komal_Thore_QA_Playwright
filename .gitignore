@@ -1,1 +1,17 @@
+node_modules/
+playwright-report/
+test-results/
 .env
+.DS_Store
+npm-debug.log*
+.vscode/
+.idea/
+coverage/
+*.log
+/.history/
+dist/
+__pycache__/
+*.pyc
+/.cache/
+coverage/
+report.html.env
