@@ -1,9 +1,14 @@
 import { test, expect } from '@playwright/test';
 test('test', async ({page}) => {
+  const username = process.env.GITHUB_USER || process.env.GITHUB_USERNAME || 'KT15234';
+  const password = process.env.GITHUB_PASS || process.env.GITHUB_PASSWORD;
+  if (!password) {
+    console.warn('GITHUB_PASS or GITHUB_PASSWORD not set. This test requires credentials to run against GitHub UI.');
+  }
   await page.goto('https://github.com/login');
-  await page.getByRole('textbox', { name: 'Username or email address' }).fill('KomalT1599');
+  await page.getByRole('textbox', { name: 'Username or email address' }).fill(username);
   await page.getByRole('textbox', { name: 'Password' }).click();
-  await page.getByRole('textbox', { name: 'Password' }).fill('Komal@1599');
+  await page.getByRole('textbox', { name: 'Password' }).fill(password || '');
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
   await page.getByRole('link', { name: 'New' }).click();
   await page.getByRole('textbox', { name: 'Repository name *' }).click();

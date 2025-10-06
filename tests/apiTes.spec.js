@@ -3,8 +3,10 @@ import dotenv from 'dotenv';
 
 // Load .env from parent folder
 dotenv.config({ path: './.env' }); 
-console.log(process.env.GITHUB_TOKEN);
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || 'YOUR_GITHUB_TOKEN_HERE';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+if (!GITHUB_TOKEN) {
+  console.warn('GITHUB_TOKEN not set. API tests that require authentication will fail without a valid token.');
+}
 
 test('Validate GitHub API token', async ({ request }) => {
   const response = await request.get('https://api.github.com/user', {

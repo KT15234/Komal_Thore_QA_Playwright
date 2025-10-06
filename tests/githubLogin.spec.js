@@ -1,7 +1,10 @@
 import { test, expect, chromium } from '@playwright/test';
 
 const USERNAME = process.env.GITHUB_USER || 'KT15234';
-const PASSWORD = process.env.GITHUB_PASS || 'Komal@1599';
+const PASSWORD = process.env.GITHUB_PASS;
+if (!PASSWORD) {
+  console.warn('Warning: GITHUB_PASS is not set. Login tests will fail unless you set GITHUB_USER and GITHUB_PASS in your environment or .env file.');
+}
 
 test('GitHub session persists after browser restart', async () => {
   // --- 1. First login and save session ---

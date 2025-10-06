@@ -2,12 +2,12 @@ import { test, expect } from '@playwright/test';
 import dotenv from 'dotenv';
 
 // Load .env from parent folder
-dotenv.config({ path: './.env' }); 
-// console.log(process.env.GITHUB_TOKEN);
+dotenv.config({ path: './.env' });
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
 const GITHUB_PASSWORD = process.env.GITHUB_PASSWORD;
-console.log(GITHUB_USERNAME);
-console.log(GITHUB_PASSWORD);
+if (!GITHUB_USERNAME || !GITHUB_PASSWORD) {
+  console.warn('GITHUB_USERNAME or GITHUB_PASSWORD not set. Set them in environment or .env before running login tests.');
+}
 test('test', async ({ page }) => {
   await page.goto('https://github.com/login');
   const repoName = 'abdce' + Math.floor(Math.random() * 1000000);
