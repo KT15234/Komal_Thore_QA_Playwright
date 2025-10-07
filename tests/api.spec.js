@@ -10,7 +10,7 @@ const authHeader = { Authorization: `token ${validToken}` };
 
 test.describe('GitHub API Authentication & Token Management', () => {
 
-  test('✅ Valid token allows API access', async ({ request }) => {
+  test(' Valid token allows API access', async ({ request }) => {
     const response = await request.get(`${baseURL}/user`, {
       headers: authHeader
     });
@@ -20,7 +20,7 @@ test.describe('GitHub API Authentication & Token Management', () => {
     console.log('Authenticated User:', body.login);
   });
 
-  test('✅ Invalid token returns 401 Unauthorized', async ({ request }) => {
+  test(' Invalid token returns 401 Unauthorized', async ({ request }) => {
     const response = await request.get(`${baseURL}/user`, {
       headers: { Authorization: `token ${invalidToken}` }
     });
@@ -28,7 +28,7 @@ test.describe('GitHub API Authentication & Token Management', () => {
     expect(response.status()).toBe(401);
   });
 
-  test('✅ Token permissions properly enforced (read vs write)', async ({ request }) => {
+  test(' Token permissions properly enforced (read vs write)', async ({ request }) => {
     // Try creating a repo with a read-only token
     const response = await request.post(`${baseURL}/user/repos`, {
       headers: authHeader,
@@ -48,7 +48,7 @@ test.describe('GitHub API Authentication & Token Management', () => {
     }
   });
 
-  test('✅ Rate limiting headers present and accurate', async ({ request }) => {
+  test(' Rate limiting headers present and accurate', async ({ request }) => {
     const response = await request.get(`${baseURL}/rate_limit`, {
       headers: authHeader
     });
